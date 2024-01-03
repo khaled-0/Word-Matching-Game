@@ -2,10 +2,12 @@
 	import { onMount } from 'svelte';
 	import BoardView from './BoardView.svelte';
 	import { createEventDispatcher } from 'svelte';
-	import { playersList } from '$lib/data/Player';
+	import { PlayersList } from '$lib/data/Player';
+	import type { BoardSize, PlayerCount } from '$lib/data/Board';
 
-	export let boardSize: 10 | 15 | 20;
-	export let playerCount: 2 | 3 | 4;
+	export let boardSize: BoardSize;
+	export let playerCount: PlayerCount;
+	export let placeholder: boolean = false;
 
 	const words = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 	let boardData: HTMLInputElement[][] = Array.from(Array(boardSize), () =>
@@ -86,7 +88,7 @@
 	}
 
 	function getPlayerColor(playerId: number): string {
-		return playersList[playerId].color;
+		return PlayersList[playerId].color;
 	}
 
 	let focusedInputIndex: { row: number; column: number } | null;
@@ -100,6 +102,8 @@
 
 <BoardView
 	{boardData}
+	{placeholder}
 	on:fieldFocus={(event) => (focusedInputIndex = event.detail)}
+	on:fieldUnfocus={() => (focusedInputIndex = null)}
 	on:keyPress={(event) => handleKeyPress(event.detail.event, event.detail.row, event.detail.column)}
 />

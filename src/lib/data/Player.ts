@@ -4,7 +4,7 @@ export type Player = {
 	color: string;
 };
 
-export const playersList: Array<Player> = [
+export const PlayersList: Array<Player> = [
 	{ name: 'P1', id: 0, color: 'red' },
 	{ name: 'P2', id: 1, color: 'green' },
 	{ name: 'P3', id: 2, color: 'blue' },
