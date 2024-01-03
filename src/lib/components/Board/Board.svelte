@@ -1,14 +1,20 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import BoardView from './BoardView.svelte';
+	import { createEventDispatcher } from 'svelte';
+	import { playersList } from '$lib/data/Player';
 
 	export let boardSize: 10 | 15 | 20;
+	export let playerCount: 2 | 3 | 4;
 
 	const words = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 	let boardData: HTMLInputElement[][] = Array.from(Array(boardSize), () =>
 		new Array(boardSize).fill('')
 	);
 
-	function handleKeyPressValidation(keyPress: KeyboardEvent, row: number, column: number) {
+	const dispatch = createEventDispatcher<{ onPlayerSubmit: { nextPlayerId: number } }>();
+
+	function handleKeyPress(keyPress: KeyboardEvent, row: number, column: number) {
 		const width = boardData[row].length,
 			height = boardData.length,
 			prevCol = column - 1,
@@ -45,10 +51,19 @@
 				break;
 
 			default:
-				if (boardData[row][column].value) break;
+				const boardField = boardData[row][column];
+				if (boardField.value) break;
 				if (words.includes(keyPress.key.toUpperCase())) {
-					boardData[row][column].value = keyPress.key.toUpperCase();
-					boardData[row][column].disabled = true;
+					const playerId = getPlayerId();
+
+					boardField.style.setProperty('--color', getPlayerColor(playerId));
+					boardField.dataset.playerId = playerId.toString();
+
+					boardField.value = keyPress.key.toUpperCase();
+					boardField.disabled = true;
+
+					//Now getPlayerId() != playerId; because an input is disabled
+					dispatch('onPlayerSubmit', { nextPlayerId: getPlayerId() });
 					return true;
 				}
 		}
@@ -56,39 +71,35 @@
 		return false;
 	}
 
+	function getTotalBoardInputsLength(): number {
+		// https://stackoverflow.com/a/48469793/16867144
+		// Filter out the empty items by checking if the field is disabled
+		// As the field gets disabled on valid input
+		return boardData.reduce(
+			(currentCount, row) => currentCount + row.filter((item) => item.disabled).length,
+			0
+		);
+	}
+
+	function getPlayerId(): number {
+		return getTotalBoardInputsLength() % playerCount;
+	}
+
+	function getPlayerColor(playerId: number): string {
+		return playersList[playerId].color;
+	}
+
 	let focusedInputIndex: { row: number; column: number } | null;
 	onMount(() => {
 		document.addEventListener('keypress', (event) => {
 			if (focusedInputIndex == null) return;
-			handleKeyPressValidation(event, focusedInputIndex.row, focusedInputIndex.column);
+			handleKeyPress(event, focusedInputIndex.row, focusedInputIndex.column);
 		});
 	});
 </script>
 
-{#each boardData as row, rowIndex}
-	<div class="board">
-		{#each row as columnField, columnIndex}
-			<span class="column">
-				<input
-					placeholder={(columnIndex + rowIndex * 10).toString()}
-					class="input"
-					maxlength="1"
-					type="text"
-					bind:this={columnField}
-					on:focus={() => (focusedInputIndex = { row: rowIndex, column: columnIndex })}
-					on:keydown|preventDefault={(e) => handleKeyPressValidation(e, rowIndex, columnIndex)}
-				/>
-			</span>
-		{/each}
-	</div>
-{/each}
-
-<style lang="postcss">
-	.input {
-		@apply w-16 h-16 m-2 bg-gray-600 text-center;
-	}
-
-	.board {
-		@apply mx-auto w-fit;
-	}
-</style>
+<BoardView
+	{boardData}
+	on:fieldFocus={(event) => (focusedInputIndex = event.detail)}
+	on:keyPress={(event) => handleKeyPress(event.detail.event, event.detail.row, event.detail.column)}
+/>
