@@ -7,7 +7,7 @@
 
 	export let boardSize: BoardSize;
 	export let playerCount: PlayerCount;
-	export let placeholder: boolean = false;
+	export let boardHint: boolean = false;
 
 	const words = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 	let boardData: HTMLInputElement[][] = Array.from(Array(boardSize), () =>
@@ -63,6 +63,7 @@
 
 					boardField.value = keyPress.key.toUpperCase();
 					boardField.disabled = true;
+					boardField.dataset.focused = undefined;
 
 					//Now getPlayerId() != playerId; because an input is disabled
 					dispatch('onPlayerSubmit', { nextPlayerId: getPlayerId() });
@@ -100,10 +101,11 @@
 	});
 </script>
 
+<!-- TODO better unfocus method rather than relying on timeout -->
 <BoardView
 	{boardData}
-	{placeholder}
+	{boardHint}
 	on:fieldFocus={(event) => (focusedInputIndex = event.detail)}
-	on:fieldUnfocus={() => (focusedInputIndex = null)}
+	on:fieldUnfocus={() => setTimeout(() => (focusedInputIndex = null), 200)}
 	on:keyPress={(event) => handleKeyPress(event.detail.event, event.detail.row, event.detail.column)}
 />

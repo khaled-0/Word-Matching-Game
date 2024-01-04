@@ -14,9 +14,7 @@
 	style="--color:{player.color}"
 	data-active={myTurn}
 	on:click={() => document.getElementById(`color-picker-${player.id}`)?.click()}
->
-	Player {player.id + 1}
-	{myTurn ? '(Play)' : ''}
+	>Player {player.id + 1}{myTurn ? "'s Turn" : ''}
 </button>
 
 <input

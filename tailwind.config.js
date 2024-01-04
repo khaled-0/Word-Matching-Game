@@ -33,30 +33,6 @@ export default {
 					800: '#b9cbe5',
 					900: '#dce5f2'
 				},
-				powder_blue: {
-					DEFAULT: '#a1c6ea',
-					100: '#0f2740',
-					200: '#1d4f80',
-					300: '#2c76c0',
-					400: '#5f9ddb',
-					500: '#a1c6ea',
-					600: '#b3d0ee',
-					700: '#c6dcf2',
-					800: '#d9e8f6',
-					900: '#ecf3fb'
-				},
-				columbia_blue: {
-					DEFAULT: '#bbd1ea',
-					100: '#142941',
-					200: '#285282',
-					300: '#3c7bc2',
-					400: '#7ca6d7',
-					500: '#bbd1ea',
-					600: '#cadbef',
-					700: '#d7e4f3',
-					800: '#e4edf7',
-					900: '#f2f6fb'
-				},
 				platinum: {
 					DEFAULT: '#dae3e5',
 					100: '#253235',
