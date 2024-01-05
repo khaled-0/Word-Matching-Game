@@ -28,7 +28,7 @@
 <style lang="postcss">
 	.label {
 		border-color: var(--color);
-		@apply border rounded-xl;
+		@apply border-2 rounded-xl;
 		@apply p-2 w-fit min-w-0 min-h-0;
 		@apply overflow-hidden;
 		@apply basis-auto flex-1;

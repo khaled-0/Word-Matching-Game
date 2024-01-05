@@ -10,7 +10,7 @@
 
 	const dispatcher = createEventDispatcher<{ toggleBoardHint: boolean }>();
 
-	let boardHint: boolean;
+	let boardHint: boolean = true;
 </script>
 
 <div class="interaction-area global-container-bg">
@@ -35,7 +35,7 @@
 			<p class="mx-auto text-platinum-500">Tap to customize</p>
 		</div>
 		<div>
-			Placeholder Hint
+			Board Hint {boardHint}
 			<input
 				type="checkbox"
 				bind:checked={boardHint}

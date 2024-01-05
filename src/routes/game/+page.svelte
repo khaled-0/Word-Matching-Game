@@ -8,7 +8,7 @@
 
 	let playerCount: PlayerCount = 4;
 	let boardSize: BoardSize = 10;
-	let boardHint: boolean = false;
+	let boardHint: boolean = true;
 
 	let color = PlayersList[0].color;
 	let currentPlayer: Player = PlayersList[0];
@@ -23,7 +23,7 @@
 	});
 </script>
 
-<div style:scale={boardScale} class="board-container absolute" id="game-board">
+<div style:scale={boardScale} class="board-container" id="game-board">
 	<Board
 		{boardSize}
 		{playerCount}
@@ -38,6 +38,7 @@
 <div class="interaction-container">
 	<!-- <button class="z-20" on:click={() => (boardScale += 1)}>++++++</button>
 	<button class="z-20" on:click={() => (boardScale -= 1)}>-------</button> -->
+	<!-- TODO Toggle Preference Window -->
 
 	<Interaction
 		{color}
@@ -50,9 +51,8 @@
 <style lang="postcss">
 	.board-container {
 		@apply left-0 right-0 top-0 bottom-0;
-		@apply flex items-center justify-center;
-		@apply large:w-3/4 h-4/6 large:h-full;
-		overflow: hidden;
+		@apply fixed flex items-center justify-center;
+		@apply w-full large:w-3/4 h-4/6 large:h-full;
 	}
 
 	.interaction-container {

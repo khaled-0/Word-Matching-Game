@@ -7,7 +7,7 @@
 
 	export let boardSize: BoardSize;
 	export let playerCount: PlayerCount;
-	export let boardHint: boolean = false;
+	export let boardHint: boolean;
 
 	const words = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 	let boardData: HTMLInputElement[][] = Array.from(Array(boardSize), () =>

@@ -15,9 +15,12 @@
 
 <style lang="postcss">
 	button {
-		@apply p-2 border-2 border-blue-600 rounded;
+		@apply large:p-2 border rounded-lg;
 		@apply w-8 h-8 large:w-12 large:h-12;
+		@apply flex-1 basis-auto text-platinum-800;
+
+		@apply border-gray-300 dark:border-gray-700;
+
 		background-color: var(--color);
-		color: white;
 	}
 </style>
