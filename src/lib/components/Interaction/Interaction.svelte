@@ -14,13 +14,15 @@
 </script>
 
 <div class="interaction-area global-container-bg">
-	<div class="letters-container">
-		{#each 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('') as value}
-			<Letter {value} {color} />
-		{/each}
+	<div>
+		<div class="letters-container">
+			{#each 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('') as value}
+				<Letter {value} {color} />
+			{/each}
+		</div>
 	</div>
 
-	<div class="bottom-section">
+	<div>
 		<div class="players-container">
 			{#each playersList as player}
 				<PlayerChip
@@ -32,7 +34,6 @@
 					}}
 				/>
 			{/each}
-			<p class="mx-auto text-platinum-500">Tap to customize</p>
 		</div>
 		<div>
 			Board Hint {boardHint}

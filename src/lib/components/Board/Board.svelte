@@ -14,7 +14,15 @@
 		new Array(boardSize).fill('')
 	);
 
-	const dispatch = createEventDispatcher<{ onPlayerSubmit: { nextPlayerId: number } }>();
+	const dispatch = createEventDispatcher<{
+		onPlayerSubmit: {
+			nextPlayerId: number;
+			submittedPlayerId: number;
+			boardData: typeof boardData;
+			submitRow: number;
+			submitColumn: number;
+		};
+	}>();
 
 	function handleKeyPress(keyPress: KeyboardEvent, row: number, column: number) {
 		const width = boardData[row].length,
@@ -66,7 +74,13 @@
 					boardField.dataset.focused = undefined;
 
 					//Now getPlayerId() != playerId; because an input is disabled
-					dispatch('onPlayerSubmit', { nextPlayerId: getPlayerId() });
+					dispatch('onPlayerSubmit', {
+						nextPlayerId: getPlayerId(),
+						boardData: boardData,
+						submittedPlayerId: playerId,
+						submitRow: row,
+						submitColumn: column
+					});
 					return true;
 				}
 		}
