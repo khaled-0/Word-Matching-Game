@@ -3,7 +3,7 @@
 	import { createEventDispatcher } from 'svelte';
 
 	export let player: Player;
-	export let myTurn: Boolean;
+	export let myTurn: boolean;
 
 	const dispatch = createEventDispatcher<{ colorChange: { color: string } }>();
 	let customColor: string;

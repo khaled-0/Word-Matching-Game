@@ -60,7 +60,7 @@
 				row != height - 1 ? boardData[nextRow][column].focus() : boardData[0][column].focus();
 				break;
 
-			default:
+			default: {
 				const boardField = boardData[row][column];
 				if (boardField.value) break;
 				if (words.includes(keyPress.key.toUpperCase())) {
@@ -83,6 +83,7 @@
 					});
 					return true;
 				}
+			}
 		}
 
 		return false;
