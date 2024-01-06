@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Player } from '$lib/data/Player';
+	import type { PlayerScore } from '$lib/data/PlayerScore';
 	import Letter from '../Letter.svelte';
 	import PlayerChip from '../PlayerChip.svelte';
 	import { createEventDispatcher } from 'svelte';
@@ -7,6 +8,7 @@
 	export let color: string;
 	export let playersList: Player[];
 	export let currentPlayer: Player;
+	export let playerScores: PlayerScore[];
 
 	const dispatcher = createEventDispatcher<{ toggleBoardHint: boolean }>();
 
@@ -23,6 +25,9 @@
 	</div>
 
 	<div>
+		{#each playerScores as score}
+			{JSON.stringify(score)}
+		{/each}
 		<div class="players-container">
 			{#each playersList as player}
 				<PlayerChip

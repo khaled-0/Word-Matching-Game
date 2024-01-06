@@ -42,11 +42,18 @@
 		color = playersList[data.nextPlayerId].color;
 		currentPlayer = playersList[data.nextPlayerId];
 
-		calculateInputScore(data.boardData, data.submitRow, data.submitColumn)
+		const existingWords: string[] = [];
+		playerScores.forEach((score) => {
+			existingWords.push(...score.words);
+		});
+
+		console.time('calc');
+		calculateInputScore(data.boardData, data.submitRow, data.submitColumn, existingWords)
 			.then((result) => {
-				//TODO Unique word check
 				playerScores[data.submittedPlayerId].score += result.score;
 				playerScores[data.submittedPlayerId].words.push(...result.words);
+				//TODO Visualize scores
+				console.timeEnd('calc');
 			})
 			.catch((err) => {
 				//TODO
@@ -63,13 +70,12 @@
 	<!-- <button class="z-20" on:click={() => (boardScale += 1)}>++++++</button>
 	<button class="z-20" on:click={() => (boardScale -= 1)}>-------</button> -->
 	<!-- TODO Toggle Preference Window -->
-	{#each playerScores as score}
-		{JSON.stringify(score)}
-	{/each}
+
 	<Interaction
 		{color}
 		{currentPlayer}
 		{playersList}
+		{playerScores}
 		on:toggleBoardHint={(event) => (boardHint = event.detail)}
 	/>
 </div>
