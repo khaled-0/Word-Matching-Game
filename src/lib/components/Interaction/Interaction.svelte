@@ -14,8 +14,6 @@
 		showPlayerScoreDetails: { player: Player; score: PlayerScore };
 		preferenceClicked: void;
 	}>();
-
-	let boardHint: boolean = true;
 </script>
 
 <div class="interaction-area global-container-bg">
