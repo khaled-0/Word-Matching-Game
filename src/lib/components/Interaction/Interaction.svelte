@@ -2,51 +2,56 @@
 	import type { Player } from '$lib/data/Player';
 	import type { PlayerScore } from '$lib/data/PlayerScore';
 	import Letter from '../Letter.svelte';
-	import PlayerChip from '../PlayerChip.svelte';
 	import { createEventDispatcher } from 'svelte';
+	import PlayerScoreChip from '../PlayerScoreChip.svelte';
 
 	export let color: string;
 	export let playersList: Player[];
 	export let currentPlayer: Player;
 	export let playerScores: PlayerScore[];
 
-	const dispatcher = createEventDispatcher<{ toggleBoardHint: boolean }>();
+	const dispatch = createEventDispatcher<{
+		showPlayerScoreDetails: { player: Player; score: PlayerScore };
+		preferenceClicked: void;
+	}>();
 
 	let boardHint: boolean = true;
 </script>
 
 <div class="interaction-area global-container-bg">
-	<div>
-		<div class="letters-container">
-			{#each 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('') as value}
-				<Letter {value} {color} />
-			{/each}
-		</div>
-	</div>
-
-	<div>
-		{#each playerScores as score}
-			{JSON.stringify(score)}
+	<div class="letters-container">
+		{#each 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('') as value}
+			<Letter {value} {color} />
 		{/each}
-		<div class="players-container">
-			{#each playersList as player}
-				<PlayerChip
-					{player}
-					myTurn={player == currentPlayer}
-					on:colorChange={(event) => {
-						player.color = event.detail.color;
-						color = currentPlayer.color;
-					}}
+	</div>
+	<div class="gap-0.5 large:gap-2 flex flex-col">
+		<div class="scoreboard-container">
+			{#each playerScores as score}
+				<PlayerScoreChip
+					player={playersList[score.playerId]}
+					myTurn={playersList[score.playerId] == currentPlayer}
+					playerScore={score}
+					on:onPlayerClick={() =>
+						dispatch('showPlayerScoreDetails', {
+							player: playersList[score.playerId],
+							score: score
+						})}
 				/>
 			{/each}
 		</div>
-		<div>
-			Board Hint {boardHint}
-			<input
-				type="checkbox"
-				bind:checked={boardHint}
-				on:change={() => dispatcher('toggleBoardHint', boardHint)}
-			/>
+
+		<div class="flex justify-between">
+			<a
+				href="https://khaled.is-a.dev"
+				target="_blank"
+				title="Visit my portfolio"
+				class="text-platinum-200 dark:text-glaucous-500">© Khaled</a
+			>
+			<button
+				title="Open game preference panel"
+				class="text-platinum-200 dark:text-glaucous-500"
+				on:click={() => dispatch('preferenceClicked')}>Preference</button
+			>
 		</div>
 	</div>
 </div>
@@ -59,12 +64,8 @@
 		@apply border-gray-300 dark:border-gray-700;
 	}
 
-	.letters-container {
+	.letters-container,
+	.scoreboard-container {
 		@apply flex flex-wrap gap-1;
-	}
-
-	.players-container {
-		@apply flex flex-wrap;
-		@apply gap-1;
 	}
 </style>

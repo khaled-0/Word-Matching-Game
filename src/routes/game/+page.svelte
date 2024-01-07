@@ -6,22 +6,35 @@
 	import { PlayersList, type Player } from '$lib/data/Player';
 	import { onMount } from 'svelte';
 	import { calculateInputScore, type PlayerScore } from '$lib/data/PlayerScore';
+	import PreferenceDialog from '$lib/components/Preference/PreferenceDialog.svelte';
+	import type { PageData } from './$types';
 
-	let playerCount: PlayerCount = 4;
-	let boardSize: BoardSize = 10;
-	let boardHint: boolean = true;
+	export let data: PageData;
 
-	let color = PlayersList[0].color;
-	let currentPlayer: Player = PlayersList[0];
+	let playerCount: PlayerCount = data.players;
+	let boardSize: BoardSize = data.board;
 
-	const playersList = PlayersList;
-	playersList.length = playerCount;
+	const playersList = Array.from(PlayersList);
+	playersList.length = data.players;
+
+	data.names?.forEach((name, index) =>
+		playersList[index] ? (playersList[index].name = name) : null
+	);
+	data.colors?.forEach((color, index) =>
+		playersList[index] ? (playersList[index].color = color) : null
+	);
+
+	let color = playersList[0].color;
+	let currentPlayer: Player = playersList[0];
 
 	const playerScores: Array<PlayerScore> = Array(playerCount)
 		.fill(null)
 		.map((_, i) => {
 			return { playerId: i, score: 0, words: [] };
 		});
+
+	let preferenceDialog: HTMLDialogElement;
+	let boardHint: boolean = true;
 
 	let boardScale = 1;
 
@@ -47,23 +60,31 @@
 			existingWords.push(...score.words);
 		});
 
-		console.time('calc');
 		calculateInputScore(data.boardData, data.submitRow, data.submitColumn, existingWords)
 			.then((result) => {
 				playerScores[data.submittedPlayerId].score += result.score;
 				playerScores[data.submittedPlayerId].words.push(...result.words);
 				//TODO Visualize scores
-				console.timeEnd('calc');
 			})
 			.catch((err) => {
 				//TODO
 				console.log(err);
 			});
 	}
+
+	function handleGameOver(): void {
+		throw new Error('Function not implemented.');
+	}
 </script>
 
 <div style:scale={boardScale} class="board-container" id="game-board">
-	<Board {boardSize} {playerCount} {boardHint} on:onPlayerSubmit={handlePlayerSubmit} />
+	<Board
+		{boardSize}
+		{playerCount}
+		{boardHint}
+		on:playerSubmit={handlePlayerSubmit}
+		on:gameOver={handleGameOver}
+	/>
 </div>
 
 <div class="interaction-container">
@@ -76,9 +97,12 @@
 		{currentPlayer}
 		{playersList}
 		{playerScores}
-		on:toggleBoardHint={(event) => (boardHint = event.detail)}
+		on:showPlayerScoreDetails={() => {}}
+		on:preferenceClicked={() => preferenceDialog.showModal()}
 	/>
 </div>
+
+<PreferenceDialog bind:dialog={preferenceDialog} />
 
 <style lang="postcss">
 	.board-container {

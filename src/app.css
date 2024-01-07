@@ -11,4 +11,8 @@ body {
 	.global-container-bg {
 		@apply bg-platinum-600 dark:bg-glaucous-100;
 	}
+
+	.global-subcontainer-bg {
+		@apply bg-platinum-800 dark:bg-glaucous-200;
+	}
 }

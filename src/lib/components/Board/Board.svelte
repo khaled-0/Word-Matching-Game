@@ -15,13 +15,14 @@
 	);
 
 	const dispatch = createEventDispatcher<{
-		onPlayerSubmit: {
+		playerSubmit: {
 			nextPlayerId: number;
 			submittedPlayerId: number;
 			boardData: typeof boardData;
 			submitRow: number;
 			submitColumn: number;
 		};
+		gameOver: void;
 	}>();
 
 	function handleKeyPress(keyPress: KeyboardEvent, row: number, column: number) {
@@ -74,13 +75,17 @@
 					boardField.dataset.focused = undefined;
 
 					//Now getPlayerId() != playerId; because an input is disabled
-					dispatch('onPlayerSubmit', {
+					dispatch('playerSubmit', {
 						nextPlayerId: getPlayerId(),
 						boardData: boardData,
 						submittedPlayerId: playerId,
 						submitRow: row,
 						submitColumn: column
 					});
+
+					// All the inputs has been filled
+					if (getFilledBoardFieldLength() == boardSize * boardSize) dispatch('gameOver');
+
 					return true;
 				}
 			}
@@ -89,7 +94,7 @@
 		return false;
 	}
 
-	function getTotalBoardInputsLength(): number {
+	function getFilledBoardFieldLength(): number {
 		// https://stackoverflow.com/a/48469793/16867144
 		// Filter out the empty items by checking if the field is disabled
 		// As the field gets disabled on valid input
@@ -100,7 +105,7 @@
 	}
 
 	function getPlayerId(): number {
-		return getTotalBoardInputsLength() % playerCount;
+		return getFilledBoardFieldLength() % playerCount;
 	}
 
 	function getPlayerColor(playerId: number): string {

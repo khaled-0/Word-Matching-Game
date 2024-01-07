@@ -25,6 +25,8 @@
 					class="input global-container-bg"
 					maxlength="1"
 					type="text"
+					inputmode="none"
+					name="{rowIndex}:{columnIndex}"
 					bind:this={columnField}
 					on:focus={() => dispatch('fieldFocus', { row: rowIndex, column: columnIndex })}
 					on:focusout={() => dispatch('fieldUnfocus')}
