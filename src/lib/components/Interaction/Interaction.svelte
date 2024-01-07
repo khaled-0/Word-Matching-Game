@@ -38,7 +38,7 @@
 			{/each}
 		</div>
 
-		<div class="flex justify-between">
+		<div class="flex justify-between w-full">
 			<a
 				href="https://khaled.is-a.dev"
 				target="_blank"
