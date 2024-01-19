@@ -1,6 +1,7 @@
 <script lang="ts">
 	export let boardData: HTMLInputElement[][];
 	export let boardHint: boolean;
+	export let focusColor: string;
 
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher<{
@@ -17,7 +18,7 @@
 	}
 </script>
 
-<div class="rows-container" style="--row:{boardData.length}">
+<div class="rows-container" style="--row:{boardData.length}; --focusColor:{focusColor}">
 	{#each boardData as row, rowIndex}
 		<div class="row">
 			{#each row as columnField, columnIndex}
@@ -56,9 +57,13 @@
 		@apply text-center cursor-pointer caret-transparent;
 		@apply text-xl large:text-2xl;
 
-		@apply rounded-md;
+		@apply rounded-md outline-none;
 		color: var(--color);
 
 		@apply focus-visible:bg-platinum-700 dark:focus-visible:bg-glaucous-200;
+	}
+
+	.input:focus {
+		outline-color: var(--focusColor);
 	}
 </style>

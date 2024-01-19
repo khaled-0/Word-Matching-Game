@@ -11,7 +11,7 @@
 <dialog bind:this={dialog} class="global-subcontainer-bg">
 	<div class="title">
 		<span>Preferences</span>
-		<button class="rounded-xl h-6 w-6 bg-red-600 border-2" on:click={() => dialog.close()} />
+		<button class="rounded-xl h-5 w-5 bg-red-600" on:click={() => dialog.close()} />
 	</div>
 	<Preference />
 </dialog>

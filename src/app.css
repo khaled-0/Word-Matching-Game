@@ -6,13 +6,3 @@ body {
 	@apply bg-platinum-900 dark:bg-rich_black-500;
 	@apply text-rich_black-500 dark:text-platinum-900;
 }
-
-@layer components {
-	.global-container-bg {
-		@apply bg-platinum-600 dark:bg-glaucous-100;
-	}
-
-	.global-subcontainer-bg {
-		@apply bg-platinum-800 dark:bg-glaucous-200;
-	}
-}

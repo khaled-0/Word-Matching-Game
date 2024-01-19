@@ -82,6 +82,7 @@
 		{boardSize}
 		{playerCount}
 		{boardHint}
+		focusColor={currentPlayer.color}
 		on:playerSubmit={handlePlayerSubmit}
 		on:gameOver={handleGameOver}
 	/>
@@ -93,11 +94,9 @@
 	<!-- TODO Toggle Preference Window -->
 
 	<Interaction
-		{color}
 		{currentPlayer}
 		{playersList}
 		{playerScores}
-		on:showPlayerScoreDetails={() => {}}
 		on:preferenceClicked={() => preferenceDialog.showModal()}
 	/>
 </div>

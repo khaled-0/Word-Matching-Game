@@ -8,6 +8,7 @@
 	export let boardSize: BoardSize;
 	export let playerCount: PlayerCount;
 	export let boardHint: boolean;
+	export let focusColor: string;
 
 	const words = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 	let boardData: HTMLInputElement[][] = Array.from(Array(boardSize), () =>
@@ -125,6 +126,7 @@
 <BoardView
 	{boardData}
 	{boardHint}
+	{focusColor}
 	on:fieldFocus={(event) => (focusedInputIndex = event.detail)}
 	on:fieldUnfocus={() => setTimeout(() => (focusedInputIndex = null), 200)}
 	on:keyPress={(event) => handleKeyPress(event.detail.event, event.detail.row, event.detail.column)}

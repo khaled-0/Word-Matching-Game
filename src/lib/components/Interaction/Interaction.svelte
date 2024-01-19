@@ -1,17 +1,18 @@
 <script lang="ts">
 	import type { Player } from '$lib/data/Player';
 	import type { PlayerScore } from '$lib/data/PlayerScore';
-	import Letter from '../Letter.svelte';
+	import Letter from './Letter.svelte';
 	import { createEventDispatcher } from 'svelte';
-	import PlayerScoreChip from '../PlayerScoreChip.svelte';
+	import PlayerScoreChip from '../Player/PlayerScoreChip.svelte';
+	import PlayerDetailsDialog from '../Player/PlayerDetailsDialog.svelte';
 
-	export let color: string;
 	export let playersList: Player[];
 	export let currentPlayer: Player;
 	export let playerScores: PlayerScore[];
 
+	let playerDetailsDialog: HTMLDialogElement;
+	let playerDetailsDialogData: { player: Player; score: PlayerScore };
 	const dispatch = createEventDispatcher<{
-		showPlayerScoreDetails: { player: Player; score: PlayerScore };
 		preferenceClicked: void;
 	}>();
 </script>
@@ -19,7 +20,7 @@
 <div class="interaction-area global-container-bg">
 	<div class="letters-container">
 		{#each 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('') as value}
-			<Letter {value} {color} />
+			<Letter {value} color={currentPlayer.color} />
 		{/each}
 	</div>
 	<div class="gap-0.5 large:gap-2 flex flex-col">
@@ -29,11 +30,10 @@
 					player={playersList[score.playerId]}
 					myTurn={playersList[score.playerId] == currentPlayer}
 					playerScore={score}
-					on:onPlayerClick={() =>
-						dispatch('showPlayerScoreDetails', {
-							player: playersList[score.playerId],
-							score: score
-						})}
+					on:onPlayerClick={() => {
+						playerDetailsDialogData = { player: playersList[score.playerId], score: score };
+						playerDetailsDialog.showModal();
+					}}
 				/>
 			{/each}
 		</div>
@@ -53,6 +53,12 @@
 		</div>
 	</div>
 </div>
+
+<PlayerDetailsDialog
+	bind:dialog={playerDetailsDialog}
+	player={playerDetailsDialogData?.player}
+	playerScore={playerDetailsDialogData?.score}
+/>
 
 <style lang="postcss">
 	.interaction-area {
