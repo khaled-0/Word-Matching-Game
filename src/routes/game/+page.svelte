@@ -8,6 +8,7 @@
 	import { calculateInputScore, type PlayerScore } from '$lib/data/PlayerScore';
 	import PreferenceDialog from '$lib/components/Preference/PreferenceDialog.svelte';
 	import type { PageData } from './$types';
+	import * as PreferenceHandler from '$lib/components/Preference/PreferenceHandler';
 
 	export let data: PageData;
 
@@ -24,7 +25,6 @@
 		playersList[index] ? (playersList[index].color = color) : null
 	);
 
-	let color = playersList[0].color;
 	let currentPlayer: Player = playersList[0];
 
 	const playerScores: Array<PlayerScore> = Array(playerCount)
@@ -52,7 +52,6 @@
 		}>
 	) {
 		const data = event.detail;
-		color = playersList[data.nextPlayerId].color;
 		currentPlayer = playersList[data.nextPlayerId];
 
 		const existingWords: string[] = [];
@@ -101,7 +100,12 @@
 	/>
 </div>
 
-<PreferenceDialog bind:dialog={preferenceDialog} />
+<PreferenceDialog
+	bind:dialog={preferenceDialog}
+	on:centerBoard={() => {
+		PreferenceHandler.centerBoard(document.getElementById('game-board'));
+	}}
+/>
 
 <style lang="postcss">
 	.board-container {

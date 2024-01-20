@@ -1,16 +1,11 @@
 <script lang="ts">
-	// import { createEventDispatcher } from 'svelte';
-	export let dialog: HTMLDialogElement;
-
 	import type { Player } from '$lib/data/Player';
 	import type { PlayerScore } from '$lib/data/PlayerScore';
 
+	export let dialog: HTMLDialogElement;
 	export let player: Player | undefined;
 	export let playerScore: PlayerScore | undefined;
-	// const dispatch = createEventDispatcher<{}>();
 </script>
-
-<!-- https://svelte.dev/repl/885653f873284f7880490dcdd1200238?version=3.48.0 -->
 
 <dialog bind:this={dialog} class="global-container-bg">
 	<div class="title">
@@ -35,7 +30,7 @@
 				>
 				<textarea
 					readonly
-					rows="4"
+					rows="9"
 					value={playerScore.words.map((w) => `${w}(${w.length})`).join(', ')}
 					class="p-2 w-full rounded-lg global-container-bg outline-none resize-none"
 				/>
@@ -46,7 +41,7 @@
 
 <style lang="postcss">
 	dialog {
-		@apply w-9/12 large:w-5/12 h-5/6 large:h-3/6;
+		@apply w-9/12 large:w-5/12 h-3/5;
 		@apply p-4 rounded-xl;
 		@apply dark:text-platinum-800 text-rich_black-100;
 	}
@@ -57,8 +52,7 @@
 	}
 
 	.body {
-		@apply p-2 my-2 rounded-xl;
-		@apply text-sm font-medium;
+		@apply p-2 mt-2 rounded-xl;
 	}
 	.global-field {
 		@apply p-2;
