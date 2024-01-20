@@ -25,10 +25,11 @@
 		</div>
 		{#if playerScore?.words.length}
 			<div class="global-field">
-				<label for="message" class="block mb-2"
+				<label for="wordslist" class="block mb-2"
 					>Words <span class="float-end">({playerScore.words.length})</span></label
 				>
 				<textarea
+					id="wordslist"
 					readonly
 					rows="9"
 					value={playerScore.words.map((w) => `${w}(${w.length})`).join(', ')}

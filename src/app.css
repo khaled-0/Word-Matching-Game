@@ -6,3 +6,12 @@ body {
 	@apply bg-platinum-900 dark:bg-rich_black-500;
 	@apply text-rich_black-500 dark:text-platinum-900;
 }
+
+button {
+	@apply text-center;
+}
+
+button:active {
+	@apply opacity-80;
+	@apply select-none;
+}

@@ -34,8 +34,7 @@
 		});
 
 	let preferenceDialog: HTMLDialogElement;
-	let boardHint: boolean = true;
-
+	let boardHint: boolean = false;
 	let boardScale = 1;
 
 	onMount(() => {
@@ -88,10 +87,6 @@
 </div>
 
 <div class="interaction-container">
-	<!-- <button class="z-20" on:click={() => (boardScale += 1)}>++++++</button>
-	<button class="z-20" on:click={() => (boardScale -= 1)}>-------</button> -->
-	<!-- TODO Toggle Preference Window -->
-
 	<Interaction
 		{currentPlayer}
 		{playersList}
@@ -102,6 +97,8 @@
 
 <PreferenceDialog
 	bind:dialog={preferenceDialog}
+	bind:boardHint
+	bind:boardScale
 	on:centerBoard={() => {
 		PreferenceHandler.centerBoard(document.getElementById('game-board'));
 	}}
@@ -112,6 +109,7 @@
 		@apply left-0 right-0 top-0 bottom-0;
 		@apply fixed flex items-center justify-center;
 		@apply w-full large:w-3/4 h-4/6 large:h-full;
+		@apply transition-[scale];
 	}
 
 	.interaction-container {
