@@ -9,6 +9,7 @@
 	import PreferenceDialog from '$lib/components/Preference/PreferenceDialog.svelte';
 	import type { PageData } from './$types';
 	import * as PreferenceHandler from '$lib/components/Preference/PreferenceHandler';
+	import preventTabClose from '$lib/utils/preventTabClose';
 
 	export let data: PageData;
 
@@ -34,11 +35,11 @@
 		});
 
 	let preferenceDialog: HTMLDialogElement;
-	let boardHint: boolean = false;
+	let boardHint: boolean = true;
 	let boardScale = 1;
 
 	onMount(() => {
-		makeElementDragable(document.getElementById('game-board')!);
+		makeElementDragable(document.querySelector('.board-container')!);
 	});
 
 	async function handlePlayerSubmit(
@@ -71,11 +72,12 @@
 	}
 
 	function handleGameOver(): void {
+		alert('Game Over');
 		throw new Error('Function not implemented.');
 	}
 </script>
 
-<div style:scale={boardScale} class="board-container" id="game-board">
+<div style:scale={boardScale} use:preventTabClose class="board-container">
 	<Board
 		{boardSize}
 		{playerCount}
@@ -100,7 +102,7 @@
 	bind:boardHint
 	bind:boardScale
 	on:centerBoard={() => {
-		PreferenceHandler.centerBoard(document.getElementById('game-board'));
+		PreferenceHandler.centerBoard(document.querySelector('.board-container'));
 	}}
 />
 

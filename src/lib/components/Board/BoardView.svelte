@@ -66,4 +66,8 @@
 	.input:focus {
 		outline-color: var(--focusColor);
 	}
+
+	.input:disabled {
+		pointer-events: none;
+	}
 </style>

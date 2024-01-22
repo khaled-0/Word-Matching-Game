@@ -128,6 +128,6 @@
 	{boardHint}
 	{focusColor}
 	on:fieldFocus={(event) => (focusedInputIndex = event.detail)}
-	on:fieldUnfocus={() => setTimeout(() => (focusedInputIndex = null), 200)}
+	on:fieldUnfocus={() => setTimeout(() => (focusedInputIndex = null), 400)}
 	on:keyPress={(event) => handleKeyPress(event.detail.event, event.detail.row, event.detail.column)}
 />
