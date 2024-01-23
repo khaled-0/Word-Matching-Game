@@ -80,7 +80,7 @@
 <div style:scale={boardScale} use:preventTabClose class="board-container">
 	<Board
 		{boardSize}
-		{playerCount}
+		players={playersList}
 		{boardHint}
 		focusColor={currentPlayer.color}
 		on:playerSubmit={handlePlayerSubmit}

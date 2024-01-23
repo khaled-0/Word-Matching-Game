@@ -2,14 +2,15 @@
 	import { onMount } from 'svelte';
 	import BoardView from './BoardView.svelte';
 	import { createEventDispatcher } from 'svelte';
-	import { PlayersList } from '$lib/data/Player';
-	import type { BoardSize, PlayerCount } from '$lib/data/Board';
+	import { type Player } from '$lib/data/Player';
+	import type { BoardSize } from '$lib/data/Board';
 
 	export let boardSize: BoardSize;
-	export let playerCount: PlayerCount;
+	export let players: Array<Player>;
 	export let boardHint: boolean;
 	export let focusColor: string;
 
+	let currentPlayerId = 0;
 	const words = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 	let boardData: HTMLInputElement[][] = Array.from(Array(boardSize), () =>
 		new Array(boardSize).fill('')
@@ -35,6 +36,7 @@
 			nextRow = row + 1;
 
 		switch (keyPress.key) {
+			//TODO : Fix if input disabled
 			// Preserve tab functionality
 			// loop to first input of next row when end of row is reached
 			// or to first row and column when end of matrix is reached
@@ -62,37 +64,43 @@
 				row != height - 1 ? boardData[nextRow][column].focus() : boardData[0][column].focus();
 				break;
 
-			default: {
-				const boardField = boardData[row][column];
-				if (boardField.value) break;
-				if (words.includes(keyPress.key.toUpperCase())) {
-					const playerId = getPlayerId();
-
-					boardField.style.setProperty('--color', getPlayerColor(playerId));
-					boardField.dataset.playerId = playerId.toString();
-
-					boardField.value = keyPress.key.toUpperCase();
-					boardField.disabled = true;
-					boardField.dataset.focused = undefined;
-
-					//Now getPlayerId() != playerId; because an input is disabled
-					dispatch('playerSubmit', {
-						nextPlayerId: getPlayerId(),
-						boardData: boardData,
-						submittedPlayerId: playerId,
-						submitRow: row,
-						submitColumn: column
-					});
-
-					// All the inputs has been filled
-					if (getFilledBoardFieldLength() == boardSize * boardSize) dispatch('gameOver');
-
-					return true;
-				}
-			}
+			default:
+				return handleLetterInput(keyPress, row, column);
 		}
 
 		return false;
+	}
+
+	function handleLetterInput(keyPress: KeyboardEvent, row: number, column: number): boolean {
+		const boardField = boardData[row][column];
+		if (boardField.value) return false;
+		if (!words.includes(keyPress.key.toUpperCase())) return false;
+		const submittedPlayerId = currentPlayerId;
+
+		boardField.style.setProperty('--color', players[submittedPlayerId].color);
+		boardField.dataset.playerId = submittedPlayerId.toString();
+
+		boardField.value = keyPress.key.toUpperCase();
+		boardField.disabled = true;
+		boardField.dataset.focused = undefined;
+
+		dispatch('playerSubmit', {
+			nextPlayerId: switchToNextPlayer(),
+			boardData: boardData,
+			submittedPlayerId: submittedPlayerId,
+			submitRow: row,
+			submitColumn: column
+		});
+
+		// All the inputs has been filled
+		if (getFilledBoardFieldLength() == boardSize * boardSize) dispatch('gameOver');
+
+		return true;
+	}
+
+	function switchToNextPlayer(): number {
+		currentPlayerId = (currentPlayerId + 1) % players.length;
+		return currentPlayerId;
 	}
 
 	function getFilledBoardFieldLength(): number {
@@ -103,14 +111,6 @@
 			(currentCount, row) => currentCount + row.filter((item) => item.disabled).length,
 			0
 		);
-	}
-
-	function getPlayerId(): number {
-		return getFilledBoardFieldLength() % playerCount;
-	}
-
-	function getPlayerColor(playerId: number): string {
-		return PlayersList[playerId].color;
 	}
 
 	let focusedInputIndex: { row: number; column: number } | null;
