@@ -29,14 +29,15 @@
 
 	function handleKeyPress(keyPress: KeyboardEvent, row: number, column: number) {
 		const width = boardData[row].length,
-			height = boardData.length,
-			prevCol = column - 1,
+			height = boardData.length;
+
+		let prevCol = column - 1,
 			nextCol = column + 1,
 			prevRow = row - 1,
 			nextRow = row + 1;
 
 		switch (keyPress.key) {
-			//TODO : Fix if input disabled
+			// TODO This is the shittiest way of doing this
 			// Preserve tab functionality
 			// loop to first input of next row when end of row is reached
 			// or to first row and column when end of matrix is reached
@@ -48,20 +49,52 @@
 
 			// Loop around single row with right and left arrows
 			case 'ArrowRight':
-				nextCol != width ? boardData[row][nextCol].focus() : boardData[row][0].focus();
+				while (true) {
+					if (nextCol == width) {
+						nextCol--;
+						break;
+					}
+					if (!boardData[row][nextCol].disabled) break;
+					nextCol++;
+				}
+				boardData[row][nextCol].focus();
 				break;
 
 			case 'ArrowLeft':
-				column != 0 ? boardData[row][prevCol].focus() : boardData[row][width - 1].focus();
+				while (true) {
+					if (prevCol + 1 == 0) {
+						prevCol++;
+						break;
+					}
+					if (!boardData[row][prevCol].disabled) break;
+					prevCol--;
+				}
+				boardData[row][prevCol].focus();
 				break;
 
 			// loop around single column with up and down arrows
 			case 'ArrowUp':
-				row != 0 ? boardData[prevRow][column].focus() : boardData[height - 1][column].focus();
+				while (true) {
+					if (prevRow + 1 == 0) {
+						prevRow++;
+						break;
+					}
+					if (!boardData[prevRow][column].disabled) break;
+					prevRow--;
+				}
+				boardData[prevRow][column].focus();
 				break;
 
 			case 'ArrowDown':
-				row != height - 1 ? boardData[nextRow][column].focus() : boardData[0][column].focus();
+				while (true) {
+					if (nextRow == height) {
+						nextRow--;
+						break;
+					}
+					if (!boardData[nextRow][column].disabled) break;
+					nextRow++;
+				}
+				boardData[nextRow][column].focus();
 				break;
 
 			default:
