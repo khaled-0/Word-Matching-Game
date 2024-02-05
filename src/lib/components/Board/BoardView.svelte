@@ -69,5 +69,18 @@
 
 	.input:disabled {
 		pointer-events: none;
+		animation: popout 300ms;
+	}
+
+	@keyframes popout {
+		from {
+			transform: scale(0);
+		}
+		80% {
+			transform: scale(1.2);
+		}
+		to {
+			transform: scale(1);
+		}
 	}
 </style>
