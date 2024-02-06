@@ -28,13 +28,11 @@
 				<label for="wordslist" class="block mb-2"
 					>Words <span class="float-end">({playerScore.words.length})</span></label
 				>
-				<textarea
-					id="wordslist"
-					readonly
-					rows="9"
-					value={playerScore.words.map((w) => `${w}(${w.length})`).join(', ')}
-					class="p-2 w-full rounded-lg global-container-bg outline-none resize-none"
-				/>
+				<div class="words-container">
+					{#each playerScore.words as word}
+						<p>{word}({word.length})</p>
+					{/each}
+				</div>
 			</div>
 		{/if}
 	</div>
@@ -57,5 +55,9 @@
 	}
 	.global-field {
 		@apply p-2;
+	}
+
+	.words-container {
+		@apply p-2 w-full rounded-lg global-container-bg outline-none resize-none;
 	}
 </style>
