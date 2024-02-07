@@ -49,7 +49,7 @@
 
 			// Loop around single row with right and left arrows
 			case 'ArrowRight':
-				while (true) {
+				while (nextCol != width) {
 					if (nextCol == width) {
 						nextCol--;
 						break;
@@ -61,7 +61,7 @@
 				break;
 
 			case 'ArrowLeft':
-				while (true) {
+				while (prevCol + 1 != 0) {
 					if (prevCol + 1 == 0) {
 						prevCol++;
 						break;
@@ -74,7 +74,7 @@
 
 			// loop around single column with up and down arrows
 			case 'ArrowUp':
-				while (true) {
+				while (prevRow + 1 != 0) {
 					if (prevRow + 1 == 0) {
 						prevRow++;
 						break;
@@ -86,7 +86,7 @@
 				break;
 
 			case 'ArrowDown':
-				while (true) {
+				while (nextRow != height) {
 					if (nextRow == height) {
 						nextRow--;
 						break;
@@ -155,7 +155,6 @@
 	});
 </script>
 
-<!-- TODO better unfocus method rather than relying on timeout -->
 <BoardView
 	{boardData}
 	{boardHint}

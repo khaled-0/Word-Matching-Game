@@ -10,6 +10,7 @@
 	import type { PageData } from './$types';
 	import * as PreferenceHandler from '$lib/components/Preference/PreferenceHandler';
 	import preventTabClose from '$lib/utils/preventTabClose';
+	// import AlertBoard from '$lib/components/AlertBoard.svelte';
 
 	export let data: PageData;
 
@@ -59,16 +60,16 @@
 			existingWords.push(...score.words);
 		});
 
-		calculateInputScore(data.boardData, data.submitRow, data.submitColumn, existingWords)
-			.then((result) => {
+		calculateInputScore(data.boardData, data.submitRow, data.submitColumn, existingWords).then(
+			(result) => {
 				playerScores[data.submittedPlayerId].score += result.score;
 				playerScores[data.submittedPlayerId].words.push(...result.words);
+
 				//TODO Visualize scores
-			})
-			.catch((err) => {
-				//TODO
-				console.log(err);
-			});
+				// for (const word in result.words) {
+				// }
+			}
+		);
 	}
 
 	function handleGameOver(): void {
@@ -96,6 +97,8 @@
 		on:preferenceClicked={() => preferenceDialog.showModal()}
 	/>
 </div>
+
+<!-- <AlertBoard message="SussyBaka scored 69points with <p color='red'>amongus</p>" /> -->
 
 <PreferenceDialog
 	bind:dialog={preferenceDialog}
