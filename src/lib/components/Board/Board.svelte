@@ -3,7 +3,7 @@
 	import BoardView from './BoardView.svelte';
 	import { createEventDispatcher } from 'svelte';
 	import { type Player } from '$lib/data/Player';
-	import type { BoardSize } from '$lib/data/Board';
+	import type { BoardSize } from '$lib/data/GameParameters';
 
 	export let boardSize: BoardSize;
 	export let players: Array<Player>;

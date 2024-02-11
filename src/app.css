@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 body {
-	@apply bg-platinum-900 dark:bg-rich_black-500;
-	@apply text-rich_black-500 dark:text-platinum-900;
+	@apply bg-platinum-900 dark:bg-primary-500;
+	@apply text-primary-500 dark:text-platinum-900;
 }
 
 button {

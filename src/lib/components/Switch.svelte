@@ -23,7 +23,7 @@
 		@apply absolute content-[''];
 		@apply left-0 top-[10%] bottom-[10%];
 		@apply h-5 w-5 large:h-6 large:w-6 rounded-full;
-		@apply bg-rich_black-600 dark:bg-platinum-600;
+		@apply bg-primary-600 dark:bg-platinum-600;
 		@apply transition-[left,right];
 	}
 

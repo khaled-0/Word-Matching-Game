@@ -31,7 +31,7 @@
 	dialog {
 		@apply w-9/12 large:w-5/12 h-4/6;
 		@apply p-4 rounded-xl;
-		@apply dark:text-platinum-800 text-rich_black-100;
+		@apply dark:text-platinum-800 text-primary-100;
 	}
 
 	.title {

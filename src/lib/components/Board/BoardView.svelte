@@ -57,7 +57,7 @@
 		@apply text-center cursor-pointer caret-transparent;
 		@apply text-xl large:text-2xl;
 
-		@apply rounded-md outline-none;
+		@apply rounded-md outline-none border-none ring-0;
 		color: var(--color);
 
 		@apply focus-visible:bg-platinum-700 dark:focus-visible:bg-glaucous-200;

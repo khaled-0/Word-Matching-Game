@@ -48,7 +48,8 @@
 
 	.score {
 		@apply py-0.5 px-1 rounded;
-		@apply text-sm large:text-base;
+		@apply text-sm large:text-base font-semibold;
+		@apply text-white dark:text-gray-300;
 		background-color: var(--color);
 	}
 </style>

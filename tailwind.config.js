@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-	content: ['./src/**/*.{html,js,svelte,ts}'],
+	content: [
+		'./src/**/*.{html,js,svelte,ts}',
+		'./node_modules/flowbite-svelte/**/*.{html,js,svelte,ts}'
+	],
+	darkMode: 'media',
 	theme: {
 		extend: {
 			screens: {
@@ -9,7 +13,7 @@ export default {
 				large: '1024px'
 			},
 			colors: {
-				rich_black: {
+				primary: {
 					DEFAULT: '#04080f',
 					100: '#010203',
 					200: '#020306',
@@ -21,6 +25,7 @@ export default {
 					800: '#648ed6',
 					900: '#b2c6ea'
 				},
+
 				glaucous: {
 					DEFAULT: '#507dbc',
 					100: '#0f1927',
@@ -49,6 +54,7 @@ export default {
 		}
 	},
 	plugins: [
+		require('flowbite/plugin'),
 		({ addComponents, theme }) => {
 			addComponents({
 				'.global-container-bg': {

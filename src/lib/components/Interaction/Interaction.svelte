@@ -5,6 +5,7 @@
 	import { createEventDispatcher } from 'svelte';
 	import PlayerScoreChip from '../Player/PlayerScoreChip.svelte';
 	import PlayerDetailsDialog from '../Player/PlayerDetailsDialog.svelte';
+	import { Card } from 'flowbite-svelte';
 
 	export let playersList: Player[];
 	export let currentPlayer: Player;
@@ -17,14 +18,14 @@
 	}>();
 </script>
 
-<div class="interaction-area global-container-bg">
-	<div class="letters-container">
+<Card class="h-full p-2 large:p-4 justify-between" size="xl">
+	<div class="flex flex-wrap gap-1">
 		{#each 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('') as value}
 			<Letter {value} color={currentPlayer.color} />
 		{/each}
 	</div>
 	<div class="gap-0.5 large:gap-2 flex flex-col">
-		<div class="scoreboard-container">
+		<div class="flex flex-wrap gap-1">
 			{#each playerScores as score}
 				<PlayerScoreChip
 					player={playersList[score.playerId]}
@@ -52,24 +53,10 @@
 			>
 		</div>
 	</div>
-</div>
+</Card>
 
 <PlayerDetailsDialog
 	bind:dialog={playerDetailsDialog}
 	player={playerDetailsDialogData?.player}
 	playerScore={playerDetailsDialogData?.score}
 />
-
-<style lang="postcss">
-	.interaction-area {
-		@apply h-full p-2 large:p-4;
-		@apply flex flex-col justify-between;
-		@apply rounded-2xl border-2;
-		@apply border-gray-300 dark:border-gray-700;
-	}
-
-	.letters-container,
-	.scoreboard-container {
-		@apply flex flex-wrap gap-1;
-	}
-</style>

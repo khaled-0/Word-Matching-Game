@@ -1,5 +1,4 @@
-import type { BoardSize, PlayerCount } from '$lib/data/Board';
-import type { GameParameter } from '$lib/data/GameParameters';
+import type { GameParameter, BoardSize, PlayerCount } from '$lib/data/GameParameters';
 import type { PageLoad } from './$types';
 
 export const load = (async ({ url }) => {

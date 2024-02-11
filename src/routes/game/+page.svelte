@@ -2,7 +2,7 @@
 	import Board from '$lib/components/Board/Board.svelte';
 	import Interaction from '$lib/components/Interaction/Interaction.svelte';
 	import makeElementDragable from '$lib/utils/makeHTMLElementDragable';
-	import type { BoardSize, PlayerCount } from '$lib/data/Board';
+	import type { BoardSize, PlayerCount } from '$lib/data/GameParameters';
 	import { PlayersList, type Player } from '$lib/data/Player';
 	import { onMount } from 'svelte';
 	import { calculateInputScore, type PlayerScore } from '$lib/data/PlayerScore';
