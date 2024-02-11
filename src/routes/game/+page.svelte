@@ -35,7 +35,7 @@
 			return { playerId: i, score: 0, words: [] };
 		});
 
-	let preferenceDialog: HTMLDialogElement;
+	let preferenceDialogVisible: boolean;
 	let boardHint: boolean = true;
 	let boardScale = 1;
 
@@ -94,14 +94,14 @@
 		{currentPlayer}
 		{playersList}
 		{playerScores}
-		on:preferenceClicked={() => preferenceDialog.showModal()}
+		on:preferenceClicked={() => (preferenceDialogVisible = true)}
 	/>
 </div>
 
 <!-- <AlertBoard message="SussyBaka scored 69points with <p color='red'>amongus</p>" /> -->
 
 <PreferenceDialog
-	bind:dialog={preferenceDialog}
+	bind:open={preferenceDialogVisible}
 	bind:boardHint
 	bind:boardScale
 	on:centerBoard={() => {

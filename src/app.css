@@ -3,15 +3,15 @@
 @tailwind utilities;
 
 body {
-	@apply bg-platinum-900 dark:bg-primary-500;
-	@apply text-primary-500 dark:text-platinum-900;
-}
-
-button {
-	@apply text-center;
+	@apply bg-white dark:bg-gray-950;
+	@apply text-black dark:text-white;
 }
 
 button:active {
-	@apply opacity-80;
-	@apply select-none;
+	opacity: 0.8;
+	user-select: none;
+}
+
+* {
+	--tw-ring-color: rgb(0 0 0 / 0) !important;
 }

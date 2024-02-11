@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Button, P } from 'flowbite-svelte';
 	import { createEventDispatcher } from 'svelte';
 
 	const dispatch = createEventDispatcher<{ scaleUpdate: number; centerBoard: void }>();
@@ -20,50 +21,82 @@
 </script>
 
 <div class="global-field p-1.5 flex items-center large:flex-row flex-col">
-	Board Scale
+	<P>Board Scale</P>
 	<div class="flex items-center">
-		<button
-			class="ml-2 px-2 py-1 rounded-lg global-container-bg"
-			on:click={() => (scale = Math.max(scale - 1, 1))}
-		>
-			-
-		</button>
-		<span class="p-4">{scale}</span>
-		<button
-			class="px-2 py-1 rounded-lg global-container-bg"
-			on:click={() => (scale = Math.min(scale + 1, 9))}
-		>
-			+
-		</button>
-		<div class="h-6 w-0.5 global-container-bg ml-2" />
-		<button
-			on:click={() => (scale = 5)}
-			class="ml-2 global-container-bg font-medium rounded-lg text-sm pr-1 py-0.5 text-center inline-flex items-center"
-		>
+		<Button outline class="ml-2 p-0.5" on:click={() => (scale = Math.max(scale - 1, 1))}>
 			<svg
-				class="p-0.5 h-6 w-6 large:h-8 large:w-8"
-				viewBox="0 0 21 21"
+				class="w-6 h-6"
+				aria-hidden="true"
 				xmlns="http://www.w3.org/2000/svg"
-				><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-					<path d="M4 6a8 8 0 1 1-1 5" />
-					<path d="M8 7H4V3" />
-				</g>
+				fill="none"
+				viewBox="0 0 24 24"
+			>
+				<path
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M5 12h14"
+				/>
 			</svg>
-		</button>
+		</Button>
+		<span class="p-4">{scale}</span>
+		<Button outline class="p-0.5" on:click={() => (scale = Math.min(scale + 1, 9))}>
+			<svg
+				class="w-6 h-6"
+				aria-hidden="true"
+				xmlns="http://www.w3.org/2000/svg"
+				fill="none"
+				viewBox="0 0 24 24"
+			>
+				<path
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M5 12h14m-7 7V5"
+				/>
+			</svg>
+		</Button>
+
+		<div class="h-6 w-0.5 ml-2 bg-gray-300 dark:bg-slate-700" />
+
+		<Button outline on:click={() => (scale = 5)} class="ml-2 p-1">
+			<svg
+				class="w-6 h-6"
+				aria-hidden="true"
+				xmlns="http://www.w3.org/2000/svg"
+				fill="none"
+				viewBox="0 0 24 24"
+			>
+				<path
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M17.7 7.7A7.1 7.1 0 0 0 5 10.8M18 4v4h-4m-7.7 8.3A7.1 7.1 0 0 0 19 13.2M6 20v-4h4"
+				/>
+			</svg>
+		</Button>
 	</div>
 
 	<div class="large:ml-auto w-fit">
-		<button
-			on:click={() => dispatch('centerBoard')}
-			class="global-container-bg font-medium rounded-lg text-sm pr-1 py-0.5 text-center inline-flex items-center"
+		<Button outline pill size="sm" on:click={() => dispatch('centerBoard')}
 			><svg
-				class="p-0.5 h-6 w-6 large:h-8 large:w-8 fill-current"
-				viewBox="0 0 32 32"
+				class="w-6 h-6"
+				aria-hidden="true"
 				xmlns="http://www.w3.org/2000/svg"
-				><path
-					d="M6 12H4V4h8v2H6v6zM28 12h-2V6h-6V4h8v8zM12 28H4v-8h2v6h6v2zM28 28h-8v-2h6v-6h2v8zM15 10h2v4h-2zM10 15h4v2h-4zM18 15h4v2h-4zM15 18h2v4h-2z"
-				/></svg
-			>Recenter
-		</button>
+				fill="none"
+				viewBox="0 0 24 24"
+			>
+				<path
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M5 9h4m0 0V5m0 4L4 4m15 5h-4m0 0V5m0 4 5-5M5 15h4m0 0v4m0-4-5 5m15-5h-4m0 0v4m0-4 5 5"
+				/>
+			</svg>Recenter
+		</Button>
 	</div>
 </div>
