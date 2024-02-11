@@ -2,7 +2,7 @@
 	import { createEventDispatcher } from 'svelte';
 	import ScaleControl from './ScaleControl.svelte';
 	import TogglePreference from './TogglePreference.svelte';
-	import { Card, Modal, P } from 'flowbite-svelte';
+	import { Modal } from 'flowbite-svelte';
 	export let open: boolean;
 
 	export let boardHint: boolean;

@@ -1,38 +1,30 @@
 <script lang="ts">
-	export let message: string;
+	import type { AlertMessages, AlertMessage } from '$lib/data/AlertBoard';
+	import { Toast } from 'flowbite-svelte';
+	export let alertMessages: AlertMessages;
+
+	function addToDismissQueue(alert: AlertMessage) {
+		setTimeout(() => (alertMessages = alertMessages.filter((e) => e != alert)), 5000);
+	}
 </script>
 
-<div class="alert-container">
-	<div class="alert-area global-container-bg">{message}</div>
-</div>
+{#each alertMessages as alert}
+	<Toast class="relative mx-0.5 my-1 p-0.5 large:p-1 w-fit gap-0">
+		<div class="flex items-center mx-0.5 large:mx-1">
+			<span class="color" style="--color:{alert.color}"></span>
+			<div class="ms-2 flex gap-2">
+				<div class="text-sm font-semibold text-gray-900 dark:text-white">{alert.title}</div>
+				<div class="text-sm font-normal">{alert.message}</div>
+			</div>
+		</div>
+		<template slot="close-button"> {addToDismissQueue(alert)}</template>
+	</Toast>
+{/each}
 
 <style lang="postcss">
-	.alert-container {
-		@apply fixed w-fit;
-		@apply left-0 right-0;
-		transform: translateX(calc(50svw - 50%));
-		animation: run 2s infinite;
-	}
-
-	.alert-area {
-		@apply h-full p-1 large:p-2;
-		/* @apply flex flex-col justify-between; */
-		@apply rounded-2xl;
-		/* @apply border-gray-300 dark:border-gray-700; */
-	}
-
-	@keyframes run {
-		from {
-			transform: translateX(calc(50svw - 50%)) translateY(0px);
-			opacity: 0.5;
-		}
-		50% {
-			transform: translateX(calc(50svw - 50%)) translateY(1.5rem);
-			opacity: 1;
-		}
-		to {
-			transform: translateX(calc(50svw - 50%)) translateY(0px);
-			opacity: 0;
-		}
+	.color {
+		@apply h-4 w-4 large:h-6 large:w-6;
+		@apply rounded-full flex-shrink-0;
+		background-color: var(--color);
 	}
 </style>

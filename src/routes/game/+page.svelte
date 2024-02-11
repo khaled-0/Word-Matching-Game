@@ -10,7 +10,8 @@
 	import type { PageData } from './$types';
 	import * as PreferenceHandler from '$lib/components/Preference/PreferenceHandler';
 	import preventTabClose from '$lib/utils/preventTabClose';
-	// import AlertBoard from '$lib/components/AlertBoard.svelte';
+	import AlertBoard from '$lib/components/AlertBoard.svelte';
+	import type { AlertMessages } from '$lib/data/AlertBoard';
 
 	export let data: PageData;
 
@@ -36,6 +37,7 @@
 		});
 
 	let preferenceDialogVisible: boolean;
+	let alertMessages: AlertMessages = [];
 	let boardHint: boolean = true;
 	let boardScale = 1;
 
@@ -65,9 +67,15 @@
 				playerScores[data.submittedPlayerId].score += result.score;
 				playerScores[data.submittedPlayerId].words.push(...result.words);
 
-				//TODO Visualize scores
-				// for (const word in result.words) {
-				// }
+				if (result.score) {
+					const player = playersList[data.submittedPlayerId];
+					alertMessages.push({
+						message: result.words.join(','),
+						title: `${player.name} +${result.score}`,
+						color: player.color
+					});
+					alertMessages = alertMessages;
+				}
 			}
 		);
 	}
@@ -98,7 +106,7 @@
 	/>
 </div>
 
-<!-- <AlertBoard message="SussyBaka scored 69points with <p color='red'>amongus</p>" /> -->
+<AlertBoard bind:alertMessages />
 
 <PreferenceDialog
 	bind:open={preferenceDialogVisible}
