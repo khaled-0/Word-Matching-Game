@@ -32,7 +32,7 @@
 
 <div class="p-4 h-svh flex justify-center">
 	<Card size="xl" class=" large:w-3/6 items-center">
-		<h1 class="text-2xl w-fit my-2">Epic Word Matching Game</h1>
+		<h1 class="text-2xl w-fit my-2 text-center">Epic Word Matching Game</h1>
 		<div class="mb-4" />
 
 		<Label defaultClass="w-full mb-1"
@@ -63,5 +63,11 @@
 			&#10084;
 			<a class="text-orange-500" href="https://kit.svelte.dev">SvelteKit</a>
 		</span>
+		<span
+			><a class="text-primary-700" href="https://words.fr.to" target="_blank">words.fr.to</a>
+			is provided by
+			<a class="text-primary-700" href="https://freedns.afraid.org" target="_blank">afraid.org</a
+			></span
+		>
 	</Card>
 </div>
