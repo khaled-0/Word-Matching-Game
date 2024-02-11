@@ -33,15 +33,19 @@
 <div class="p-4 h-svh flex justify-center">
 	<Card size="xl" class=" large:w-3/6 items-center">
 		<h1 class="text-2xl w-fit my-2">Epic Word Matching Game</h1>
-		<br />
+		<div class="mb-4" />
 
-		<Label defaultClass="w-full">Board Size<span class="float-end">{gameParams.board}</span></Label>
+		<Label defaultClass="w-full mb-1"
+			>Board Size<span class="float-end">{gameParams.board}</span></Label
+		>
 		<Range size="lg" min="6" max="16" bind:value={gameParams.board} />
-		<br />
+		<div class="mb-4" />
 
-		<Label defaultClass="w-full">Players<span class="float-end">{gameParams.players}</span></Label>
+		<Label defaultClass="w-full mb-1"
+			>Players<span class="float-end">{gameParams.players}</span></Label
+		>
 		<Range size="lg" min="2" max="6" bind:value={gameParams.players} />
-		<br />
+		<div class="mb-4" />
 
 		<div class="flex flex-wrap w-full gap-1 justify-center">
 			{#each playersList as player, index}
@@ -51,7 +55,7 @@
 			{/each}
 		</div>
 
-		<br />
+		<div class="mb-4" />
 		<Button on:click={launchGame}>Play</Button>
 
 		<span class="mt-auto">
