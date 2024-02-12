@@ -11,7 +11,7 @@
 	export let currentPlayer: Player;
 	export let playerScores: PlayerScore[];
 
-	let playerDetailsDialog: HTMLDialogElement;
+	let playerDetailsDialogVisible = false;
 	let playerDetailsDialogData: { player: Player; score: PlayerScore };
 	const dispatch = createEventDispatcher<{
 		preferenceClicked: void;
@@ -33,7 +33,7 @@
 					playerScore={score}
 					on:onPlayerClick={() => {
 						playerDetailsDialogData = { player: playersList[score.playerId], score: score };
-						playerDetailsDialog.showModal();
+						playerDetailsDialogVisible = true;
 					}}
 				/>
 			{/each}
@@ -56,7 +56,7 @@
 </Card>
 
 <PlayerDetailsDialog
-	bind:dialog={playerDetailsDialog}
+	bind:open={playerDetailsDialogVisible}
 	player={playerDetailsDialogData?.player}
 	playerScore={playerDetailsDialogData?.score}
 />

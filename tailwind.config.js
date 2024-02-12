@@ -55,24 +55,11 @@ export default {
 	},
 	plugins: [
 		require('flowbite/plugin'),
-		({ addComponents, theme }) => {
+		({ addComponents }) => {
 			addComponents({
-				'.global-container-bg': {
-					backgroundColor: theme('colors.platinum.600'),
-					'@media (prefers-color-scheme: dark)': {
-						backgroundColor: theme('colors.glaucous.100')
-					}
-				},
-				'.global-subcontainer-bg': {
-					backgroundColor: theme('colors.platinum.800'),
-					'@media (prefers-color-scheme: dark)': {
-						backgroundColor: theme('colors.glaucous.200')
-					}
-				},
-
 				'.global-field': {
-					'@apply global-subcontainer-bg': {},
-					'@apply my-1': {}
+					'@apply bg-slate-100 dark:bg-gray-700': {},
+					'@apply mb-1': {}
 				},
 				'.global-field:first-child': {
 					'border-top-left-radius': '0.75rem',

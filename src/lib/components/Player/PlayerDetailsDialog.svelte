@@ -1,19 +1,15 @@
 <script lang="ts">
 	import type { Player } from '$lib/data/Player';
 	import type { PlayerScore } from '$lib/data/PlayerScore';
+	import { Modal } from 'flowbite-svelte';
 
-	export let dialog: HTMLDialogElement;
+	export let open: boolean;
 	export let player: Player | undefined;
 	export let playerScore: PlayerScore | undefined;
 </script>
 
-<dialog bind:this={dialog} class="global-container-bg">
-	<div class="title">
-		<span>Player Details</span>
-		<button class="rounded-xl h-5 w-5 bg-red-600" on:click={() => dialog.close()} />
-	</div>
-
-	<div class="body">
+<Modal class="divide-none" size="sm" bind:open title="Player Details">
+	<div>
 		<div class="global-field flex items-center justify-between">
 			<span>
 				Name: {player?.name}
@@ -36,28 +32,15 @@
 			</div>
 		{/if}
 	</div>
-</dialog>
+</Modal>
 
 <style lang="postcss">
-	dialog {
-		@apply w-9/12 large:w-5/12 h-3/5;
-		@apply p-4 rounded-xl;
-		@apply dark:text-gray-300 text-gray-800;
-	}
-
-	.title {
-		@apply text-xl;
-		@apply flex gap-4 justify-between items-center;
-	}
-
-	.body {
-		@apply p-2 mt-2 rounded-xl;
-	}
 	.global-field {
 		@apply p-2;
 	}
 
 	.words-container {
-		@apply p-2 w-full rounded-lg global-container-bg outline-none resize-none;
+		@apply p-2 w-full rounded-lg outline-none resize-none;
+		@apply bg-gray-200 dark:bg-gray-900;
 	}
 </style>

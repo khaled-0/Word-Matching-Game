@@ -11,7 +11,7 @@
 </script>
 
 <button
-	class="container global-subcontainer-bg"
+	class="container"
 	title={`Click to show detailed score of ${player.name}`}
 	style="--color:{player.color}"
 	data-active={myTurn}
@@ -32,6 +32,7 @@
 		@apply flex justify-start items-center gap-1;
 		@apply flex-1  large:basis-full rounded-lg w-fit;
 		@apply cursor-pointer large:p-2 p-0.5;
+		@apply bg-slate-100 dark:bg-gray-700;
 	}
 
 	.color {

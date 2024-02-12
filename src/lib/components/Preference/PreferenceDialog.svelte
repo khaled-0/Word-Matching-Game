@@ -14,7 +14,7 @@
 	}>();
 </script>
 
-<Modal class="divide-none" bind:open title="Preference">
+<Modal class="divide-none" size="sm" bind:open title="Preference">
 	<div>
 		<TogglePreference title="Board Hint" bind:checked={boardHint} />
 		<ScaleControl

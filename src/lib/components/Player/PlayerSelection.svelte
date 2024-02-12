@@ -5,7 +5,7 @@
 	export let player: Player;
 </script>
 
-<div class="container global-subcontainer-bg" style="--color:{player.color}">
+<div class="container" style="--color:{player.color}">
 	<span class="color"><input type="color" bind:value={player.color} class="opacity-0 color" /></span
 	>
 	<Input bind:value={player.name} />
@@ -16,6 +16,7 @@
 		@apply flex items-center gap-1 large:gap-2 w-fit;
 		@apply flex-1 basis-auto rounded-lg;
 		@apply large:p-2 p-1;
+		@apply bg-slate-100 dark:bg-gray-700;
 	}
 
 	.color {
