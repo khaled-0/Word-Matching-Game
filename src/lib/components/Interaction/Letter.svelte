@@ -1,6 +1,5 @@
 <script lang="ts">
 	export let value: string;
-	export let color: 'red' | 'green' | 'blue' | 'yellow' | string;
 
 	function dispatchClick() {
 		document.dispatchEvent(
@@ -11,19 +10,14 @@
 	}
 </script>
 
-<button
-	title={`Insert ${value} on selected field`}
-	on:click={dispatchClick}
-	style={`--color:${color}`}>{value}</button
->
+<button title={`Insert ${value} on selected field`} on:click={dispatchClick}>{value}</button>
 
 <style lang="postcss">
 	button {
-		@apply large:p-2 border rounded-lg;
-		@apply w-8 h-8 large:w-12 large:h-12;
-		@apply flex-1 basis-auto text-platinum-800;
-		@apply border-gray-300 dark:border-gray-700;
+		@apply w-8 h-8 large:w-12 large:h-12 flex-1 basis-auto;
+		@apply text-xs font-semibold;
 
-		background-color: var(--color);
+		@apply text-gray-800 bg-gray-100 border border-gray-200 rounded-lg;
+		@apply dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500;
 	}
 </style>

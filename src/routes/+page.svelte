@@ -2,7 +2,7 @@
 	import PlayerSelection from '$lib/components/Player/PlayerSelection.svelte';
 	import type { GameParameter } from '$lib/data/GameParameters';
 	import { PlayersList } from '$lib/data/Player';
-	import { Range, Label, Button, Card } from 'flowbite-svelte';
+	import { Range, Label, Button, Card, Spinner } from 'flowbite-svelte';
 
 	let gameParams: GameParameter = {
 		board: 10,
@@ -12,8 +12,10 @@
 	};
 
 	const playersList = Array.from(PlayersList);
+	let loadingState = false;
 
 	function launchGame() {
+		loadingState = true;
 		let gameUrl = `./game?players=${gameParams.players}&board=${gameParams.board}`;
 
 		gameParams.names = playersList
@@ -56,7 +58,11 @@
 		</div>
 
 		<div class="mb-4" />
-		<Button on:click={launchGame}>Play</Button>
+		{#if loadingState}
+			<Spinner />
+		{:else}
+			<Button on:click={launchGame}>Play</Button>
+		{/if}
 
 		<span class="mt-auto">
 			Made By <a class="text-primary-700" href="https://khaled.is-a.dev" target="_blank">Khaled</a>

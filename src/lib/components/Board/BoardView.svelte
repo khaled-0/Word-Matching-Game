@@ -23,7 +23,7 @@
 		<div class="row">
 			{#each row as columnField, columnIndex}
 				<input
-					class="input global-container-bg"
+					class="input"
 					maxlength="1"
 					type="text"
 					inputmode="none"
@@ -60,7 +60,8 @@
 		@apply rounded-md outline-none border-none ring-0;
 		color: var(--color);
 
-		@apply focus-visible:bg-platinum-700 dark:focus-visible:bg-glaucous-200;
+		@apply bg-slate-200 dark:bg-gray-800;
+		@apply focus-visible:bg-slate-100 dark:focus-visible:bg-gray-700;
 	}
 
 	.input:focus {

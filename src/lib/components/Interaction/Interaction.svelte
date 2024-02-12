@@ -21,7 +21,7 @@
 <Card class="h-full p-2 large:p-4 justify-between" size="xl">
 	<div class="flex flex-wrap gap-1">
 		{#each 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('') as value}
-			<Letter {value} color={currentPlayer.color} />
+			<Letter {value} />
 		{/each}
 	</div>
 	<div class="gap-0.5 large:gap-2 flex flex-col">
@@ -44,11 +44,11 @@
 				href="https://khaled.is-a.dev"
 				target="_blank"
 				title="Visit my portfolio"
-				class="text-platinum-200 dark:text-glaucous-500">© Khaled</a
+				class="text-primary-700">© Khaled</a
 			>
 			<button
 				title="Open game preference panel"
-				class="text-platinum-200 dark:text-glaucous-500"
+				class="text-primary-700"
 				on:click={() => dispatch('preferenceClicked')}>Preference</button
 			>
 		</div>
