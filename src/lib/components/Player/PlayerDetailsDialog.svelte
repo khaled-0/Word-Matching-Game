@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Player } from '$lib/data/Player';
 	import type { PlayerScore } from '$lib/data/PlayerScore';
-	import { Modal } from 'flowbite-svelte';
+	import { Badge, Indicator, Modal, P } from 'flowbite-svelte';
 
 	export let open: boolean;
 	export let player: Player | undefined;
@@ -11,22 +11,26 @@
 <Modal class="divide-none" size="sm" bind:open title="Player Details">
 	<div>
 		<div class="global-field flex items-center justify-between">
-			<span>
+			<P>
 				Name: {player?.name}
-			</span>
+			</P>
 			<div class="h-4 w-4 rounded-md border-1" style="background-color: {player?.color};" />
 		</div>
 		<div class="global-field">
-			Score: {playerScore?.score}
+			<P>Score: {playerScore?.score}</P>
 		</div>
 		{#if playerScore?.words.length}
 			<div class="global-field">
-				<label for="wordslist" class="block mb-2"
-					>Words <span class="float-end">({playerScore.words.length})</span></label
-				>
+				<P class="block mb-2">Words <P class="float-end">({playerScore.words.length})</P></P>
 				<div class="words-container">
 					{#each playerScore.words as word}
-						<p>{word}({word.length})</p>
+						<Badge large class="m-0.5 pr-0 py-0">
+							{word}
+							<Badge
+								class="p-1 pb-0.5 ml-1 font-bold rounded-l-none bg-primary-50 dark:bg-primary-950"
+								>{word.length}</Badge
+							>
+						</Badge>
 					{/each}
 				</div>
 			</div>
