@@ -3,27 +3,17 @@
 	import { createEventDispatcher } from 'svelte';
 
 	const dispatch = createEventDispatcher<{ scaleUpdate: number; centerBoard: void }>();
-
-	let scale = 5;
-	const scaleMap: Record<number, number> = {
-		1: 0.5,
-		2: 0.6,
-		3: 0.75,
-		4: 0.9,
-		5: 1,
-		6: 1.1,
-		7: 1.2,
-		8: 1.3,
-		9: 1.5
-	};
-
-	$: scale && dispatch('scaleUpdate', scaleMap[scale]);
+	export let scale: number;
 </script>
 
 <div class="global-field p-1.5 flex items-center large:flex-row flex-col">
 	<P>Board Scale</P>
 	<div class="flex items-center">
-		<Button outline class="ml-2 p-0.5" on:click={() => (scale = Math.max(scale - 1, 1))}>
+		<Button
+			outline
+			class="ml-2 p-0.5"
+			on:click={() => (scale = Number(Math.max(scale - 0.1, 0.7).toFixed(1)))}
+		>
 			<svg
 				class="w-6 h-6"
 				aria-hidden="true"
@@ -41,7 +31,11 @@
 			</svg>
 		</Button>
 		<span class="p-4">{scale}</span>
-		<Button outline class="p-0.5" on:click={() => (scale = Math.min(scale + 1, 9))}>
+		<Button
+			outline
+			class="p-0.5"
+			on:click={() => (scale = Number(Math.min(scale + 0.1, 1.5).toFixed(1)))}
+		>
 			<svg
 				class="w-6 h-6"
 				aria-hidden="true"
@@ -61,7 +55,7 @@
 
 		<div class="h-6 w-0.5 ml-2 bg-gray-300 dark:bg-slate-700" />
 
-		<Button outline on:click={() => (scale = 5)} class="ml-2 p-1">
+		<Button outline on:click={() => (scale = 1)} class="ml-2 p-1">
 			<svg
 				class="w-6 h-6"
 				aria-hidden="true"

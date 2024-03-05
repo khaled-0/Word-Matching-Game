@@ -13,8 +13,10 @@
 		<div class="flex items-center mx-0.5 large:mx-1">
 			<span class="color" style="--color:{alert.color}"></span>
 			<div class="ms-2 flex gap-2">
-				<div class="text-sm font-semibold text-gray-900 dark:text-white">{alert.title}</div>
-				<div class="text-sm font-normal">{alert.message}</div>
+				<div class="text-sm large:text-xl font-semibold text-gray-900 dark:text-white">
+					{alert.title}
+				</div>
+				<div class="text-sm large:text-lg font-normal">{alert.message}</div>
 			</div>
 		</div>
 		<template slot="close-button"> {addToDismissQueue(alert)}</template>

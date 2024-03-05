@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Player } from '$lib/data/Player';
 	import type { PlayerScore } from '$lib/data/PlayerScore';
-	import { Badge, Indicator, Modal, P } from 'flowbite-svelte';
+	import { Badge, Modal, P } from 'flowbite-svelte';
 
 	export let open: boolean;
 	export let player: Player | undefined;

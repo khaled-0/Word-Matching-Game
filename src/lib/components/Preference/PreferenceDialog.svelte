@@ -10,16 +10,12 @@
 
 	const dispatch = createEventDispatcher<{
 		centerBoard: void;
-		scaleUpdate: number;
 	}>();
 </script>
 
 <Modal class="divide-none" size="sm" bind:open title="Preference">
 	<div>
 		<TogglePreference title="Board Hint" bind:checked={boardHint} />
-		<ScaleControl
-			on:centerBoard={() => dispatch('centerBoard')}
-			on:scaleUpdate={(event) => (boardScale = event.detail)}
-		/>
+		<ScaleControl bind:scale={boardScale} on:centerBoard={() => dispatch('centerBoard')} />
 	</div>
 </Modal>

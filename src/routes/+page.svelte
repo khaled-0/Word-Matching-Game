@@ -1,8 +1,9 @@
 <script lang="ts">
 	import PlayerSelection from '$lib/components/Player/PlayerSelection.svelte';
+	import RangeSlider from '$lib/components/RangeSlider.svelte';
 	import type { GameParameter } from '$lib/data/GameParameters';
 	import { PlayersList } from '$lib/data/Player';
-	import { Range, Label, Button, Card, Spinner } from 'flowbite-svelte';
+	import { Label, Button, Card, Spinner } from 'flowbite-svelte';
 
 	let gameParams: GameParameter = {
 		board: 10,
@@ -29,6 +30,7 @@
 		if (gameParams.colors?.length) gameUrl += `&colors=${gameParams.colors.join(',')}`;
 
 		window.location.href = gameUrl;
+		loadingState = false;
 	}
 </script>
 
@@ -40,13 +42,14 @@
 		<Label defaultClass="w-full mb-1"
 			>Board Size<span class="float-end">{gameParams.board}</span></Label
 		>
-		<Range size="lg" min="6" max="16" bind:value={gameParams.board} />
+		<RangeSlider size="lg" min={6} max={16} bind:value={gameParams.board} />
 		<div class="mb-4" />
 
 		<Label defaultClass="w-full mb-1"
 			>Players<span class="float-end">{gameParams.players}</span></Label
 		>
-		<Range size="lg" min="2" max="6" bind:value={gameParams.players} />
+		<RangeSlider size="lg" min={2} max={6} bind:value={gameParams.players} />
+
 		<div class="mb-4" />
 
 		<div class="flex flex-wrap w-full gap-1 justify-center">
