@@ -9,6 +9,8 @@ void main() {
       title: 'Word Matching Game',
       debugShowCheckedModeBanner: false,
       scrollBehavior: scrollBehavior,
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
       home: const GameScreen(),
     ),
   );
