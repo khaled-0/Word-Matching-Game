@@ -1,4 +1,4 @@
-import 'dart:math';
+import 'dart:collection';
 
 import 'package:flutter/material.dart';
 
@@ -11,18 +11,27 @@ class Player {
 
   Player(this.index)
       : name = "P$index",
-        color = Colors.primaries[Random().nextInt(Colors.primaries.length)];
+        color = Colors.primaries[index];
 }
 
 class PlayerState extends ChangeNotifier {
   final List<Player> _players;
-
-  /// This is the matrix size. e.g 10x10
-  final int count;
-
-  int? _selectedCell;
+  int _currentPlayerIndex = 0;
 
   PlayerState({
-    required this.count,
+    required int count,
   }) : _players = List.generate(count, Player.new);
+
+  Player get currentPlayer {
+    return _players[_currentPlayerIndex];
+  }
+
+  void nextPlayer() {
+    _currentPlayerIndex = _currentPlayerIndex % _players.length;
+    notifyListeners();
+  }
+
+  int get totalPlayers => _players.length;
+
+  UnmodifiableListView<Player> get items => UnmodifiableListView(_players);
 }

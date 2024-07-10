@@ -36,9 +36,9 @@ class GameScreen extends StatelessWidget {
               child: const BoardView(),
             ),
             const Positioned(
-              right: 8,
-              top: 8,
-              bottom: 8,
+              right: -4,
+              top: 0,
+              bottom: 0,
               child: ControlsView(),
             ),
           ],
