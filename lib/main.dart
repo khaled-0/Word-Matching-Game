@@ -9,8 +9,18 @@ void main() {
       title: 'Word Matching Game',
       debugShowCheckedModeBanner: false,
       scrollBehavior: scrollBehavior,
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xff069af1),
+          brightness: Brightness.light,
+        ),
+      ),
+      darkTheme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xff069af1),
+          brightness: Brightness.dark,
+        ),
+      ),
       home: const GameScreen(),
     ),
   );

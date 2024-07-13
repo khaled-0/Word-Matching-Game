@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:word_matching_game/data/board_state.dart';
+import 'package:word_matching_game/data/player_state.dart';
 
 class KeyboardView extends StatelessWidget {
   const KeyboardView({super.key});
@@ -17,16 +18,18 @@ class KeyboardView extends StatelessWidget {
       crossAxisAlignment: WrapCrossAlignment.center,
       alignment: WrapAlignment.spaceAround,
       runAlignment: WrapAlignment.spaceAround,
-      children: letters.split("").map((k) => keyView(k, board)).toList(),
+      children: letters.split("").map((k) {
+        return keyView(k, context, board);
+      }).toList(),
     );
   }
 
-  Widget keyView(String key, BoardState board) {
-    return FilledButton.tonal(
-      style: FilledButton.styleFrom(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      ),
-      onPressed: () => board.handleKeyPress(
+  Widget keyView(String key, BuildContext context, BoardState board) {
+    final player = Provider.of<PlayerState>(context).currentPlayer;
+
+    return InkWell(
+      borderRadius: BorderRadius.circular(12),
+      onTap: () => board.handleKeyPress(
         KeyDownEvent(
           character: key,
           logicalKey: const LogicalKeyboardKey(-1),
@@ -34,9 +37,16 @@ class KeyboardView extends StatelessWidget {
           timeStamp: Duration.zero,
         ),
       ),
-      child: SizedBox(
+      child: AnimatedContainer(
         height: 55,
-        width: 20,
+        width: 65,
+        decoration: ShapeDecoration(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          color: player.color.withOpacity(.1),
+        ),
+        duration: Durations.long4,
         child: Center(child: Text(key)),
       ),
     );

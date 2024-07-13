@@ -23,8 +23,10 @@ class GameScreen extends StatelessWidget {
     return Material(
       child: MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (_) => BoardState(size: 10)),
-          ChangeNotifierProvider(create: (_) => PlayerState(count: 4))
+          ChangeNotifierProvider(create: (_) => PlayerState(count: 4)),
+          ChangeNotifierProvider(
+            create: (c) => BoardState(context: c, size: 10),
+          ),
         ],
         child: Stack(
           children: [

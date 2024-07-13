@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 class Player {
   final int index;
-  String name;
-  Color color;
+  final String name;
+  final Color color;
   int score = 0;
   List<String> words = [];
 
@@ -27,7 +27,7 @@ class PlayerState extends ChangeNotifier {
   }
 
   void nextPlayer() {
-    _currentPlayerIndex = _currentPlayerIndex % _players.length;
+    _currentPlayerIndex = ++_currentPlayerIndex % _players.length;
     notifyListeners();
   }
 
