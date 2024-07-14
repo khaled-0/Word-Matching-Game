@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:word_matching_game/data/player_state.dart';
+import 'package:word_matching_game/data/words.dart';
 
 class BoardCell {
   final int index;
@@ -18,6 +19,10 @@ class BoardCell {
 class BoardState extends ChangeNotifier {
   final List<BoardCell> _data;
   final PlayerState _playerState;
+
+  final Set<String> _matchedWords = {};
+
+  bool isExistingWord(String word) => _matchedWords.contains(word);
 
   /// This is the matrix size. e.g 10x10
   final int size;
@@ -37,8 +42,12 @@ class BoardState extends ChangeNotifier {
 
     _data[_selectedCell!].value = event.character!.toUpperCase();
     _data[_selectedCell!].color = _playerState.currentPlayer.color;
-    _playerState.nextPlayer();
 
+    final word = Words.fromSelectedCell(this, _selectedCell!);
+    if (word != null) _matchedWords.add(word);
+    _playerState.updatePlayerScore(word);
+
+    _playerState.nextPlayer();
     _selectedCell = null;
     notifyListeners();
     return true;
@@ -51,6 +60,8 @@ class BoardState extends ChangeNotifier {
   }
 
   UnmodifiableListView<BoardCell> get items => UnmodifiableListView(_data);
+
+  BoardCell get(int index) => _data[index];
 
   bool isCellSelected(int index) => _selectedCell == index;
 }

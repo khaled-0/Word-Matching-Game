@@ -41,7 +41,12 @@ class BoardCellView extends StatelessWidget {
 
   Border? borderStyle(BuildContext context) {
     final players = Provider.of<PlayerState>(context, listen: false);
-    if (selected) return Border.all(color: players.currentPlayer.color);
+    if (selected) {
+      return Border.all(
+        color: players.currentPlayer.color,
+        width: 2,
+      );
+    }
     return null;
   }
 

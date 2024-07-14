@@ -12,13 +12,13 @@ class GameScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Epic matrix math to center the board
+    // so, just get the size of screen, divide by half, subtract half of board size
     // final TransformationController transformationController =
     //     TransformationController();
     // transformationController.value.translate(
     //   (MediaQuery.of(context).size.width / 2) - (70 * 5),
     //   (MediaQuery.of(context).size.height / 2) - (70 * 5),
     // );
-    //
 
     return Material(
       child: MultiProvider(

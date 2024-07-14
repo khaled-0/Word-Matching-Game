@@ -1,9 +1,12 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:word_matching_game/data/words.dart';
 import 'package:word_matching_game/game/game_screen.dart';
 
-void main() {
+void main() async {
+  await Words.init();
+
   runApp(
     MaterialApp(
       title: 'Word Matching Game',

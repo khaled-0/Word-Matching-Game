@@ -26,6 +26,13 @@ class PlayerState extends ChangeNotifier {
     return _players[_currentPlayerIndex];
   }
 
+  void updatePlayerScore(String? word) {
+    if (word == null) return;
+    currentPlayer.score += word.length;
+    currentPlayer.words.add(word);
+    notifyListeners();
+  }
+
   void nextPlayer() {
     _currentPlayerIndex = ++_currentPlayerIndex % _players.length;
     notifyListeners();
