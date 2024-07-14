@@ -7,31 +7,25 @@ import 'package:word_matching_game/game/controls/controls_view.dart';
 import 'board/board_view.dart';
 
 class GameScreen extends StatelessWidget {
-  const GameScreen({super.key});
+  const GameScreen({super.key, required this.boardSize, required this.players});
+
+  final int boardSize;
+  final List<Player> players;
 
   @override
   Widget build(BuildContext context) {
-    // Epic matrix math to center the board
-    // so, just get the size of screen, divide by half, subtract half of board size
-    // final TransformationController transformationController =
-    //     TransformationController();
-    // transformationController.value.translate(
-    //   (MediaQuery.of(context).size.width / 2) - (70 * 5),
-    //   (MediaQuery.of(context).size.height / 2) - (70 * 5),
-    // );
-
     return Material(
       child: MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (_) => PlayerState(count: 4)),
+          ChangeNotifierProvider(create: (_) => PlayerState(players)),
           ChangeNotifierProvider(
-            create: (c) => BoardState(context: c, size: 10),
+            create: (c) => BoardState(context: c, size: boardSize),
           ),
         ],
         child: Stack(
           children: [
             InteractiveViewer(
-              // transformationController: transformationController,
+              transformationController: centerTransform,
               boundaryMargin: const EdgeInsets.all(double.infinity),
               constrained: false,
               scaleEnabled: false,
@@ -47,5 +41,19 @@ class GameScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  TransformationController get centerTransform {
+    // Epic matrix math to center the board
+    // so, just get the size of screen, divide by half, subtract half of board size
+
+    final double boardSizeHalf = BoardView.cellSize * (boardSize / 2);
+    final screen = WidgetsBinding.instance.platformDispatcher.views.first;
+
+    return TransformationController()
+      ..value.translate(
+        (screen.physicalSize.width / 2.75) - boardSizeHalf,
+        (screen.physicalSize.height / 2) - boardSizeHalf,
+      );
   }
 }

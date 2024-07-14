@@ -6,6 +6,8 @@ import 'package:word_matching_game/data/board_state.dart';
 import 'board_cell_view.dart';
 
 class BoardView extends StatefulWidget {
+  static const double cellSize = 65;
+
   const BoardView({super.key});
 
   @override
@@ -14,7 +16,6 @@ class BoardView extends StatefulWidget {
 
 class _BoardViewState extends State<BoardView> {
   late BoardState board;
-  final double cellSize = 65;
 
   @override
   void initState() {
@@ -26,7 +27,7 @@ class _BoardViewState extends State<BoardView> {
   @override
   Widget build(BuildContext context) {
     return SizedBox.square(
-      dimension: cellSize * board.size,
+      dimension: BoardView.cellSize * board.size,
       child: Consumer<BoardState>(
         builder: (context, board, child) {
           return GridView.builder(

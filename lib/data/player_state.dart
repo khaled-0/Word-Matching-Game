@@ -18,9 +18,11 @@ class PlayerState extends ChangeNotifier {
   final List<Player> _players;
   int _currentPlayerIndex = 0;
 
-  PlayerState({
+  PlayerState.create({
     required int count,
   }) : _players = List.generate(count, Player.new);
+
+  PlayerState(List<Player> players) : _players = players;
 
   Player get currentPlayer {
     return _players[_currentPlayerIndex];

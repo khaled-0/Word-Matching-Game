@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:word_matching_game/data/player_state.dart';
 import 'package:word_matching_game/data/words.dart';
 import 'package:word_matching_game/game/game_screen.dart';
 
@@ -24,7 +25,10 @@ main() async {
           brightness: Brightness.dark,
         ),
       ),
-      home: const GameScreen(),
+      home: GameScreen(
+        boardSize: 10,
+        players: PlayerState.create(count: 4).items,
+      ),
     ),
   );
 }

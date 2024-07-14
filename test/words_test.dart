@@ -17,6 +17,14 @@ main() async {
       () => expect(WordUtils.reverse("string noob"), "boon gnirts"),
     );
 
+    test("IndexedLetter Conversion", () {
+      List<IndexedLetter> letters = List.generate(
+        8,
+        (index) => IndexedLetter(index, "amonguss"[index]),
+      );
+      expect(WordUtils.indexedLettersToStr(letters), "amonguss");
+    });
+
     List<BoardCell> board = List.generate(100, BoardCell.new);
 
     test("Find Horizontal Words", () {
@@ -50,6 +58,4 @@ main() async {
       expect(WordUtils.verticalWords(board, 92, 10).contains("bit"), true);
     });
   });
-
-  group("Words matching logic of board", () {});
 }
