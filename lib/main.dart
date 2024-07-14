@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:word_matching_game/data/words.dart';
 import 'package:word_matching_game/game/game_screen.dart';
 
-void main() async {
+main() async {
   await Words.init();
 
   runApp(
