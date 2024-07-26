@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 
 class Player {
   final int index;
-  final String name;
   final Color color;
+  String? customName;
   int score = 0;
   List<String> words = [];
 
-  Player(this.index)
-      : name = "P$index",
-        color = Colors.primaries[index];
+  String get name => customName ?? "P${index + 1}";
+
+  Player(this.index) : color = Colors.primaries[index];
 }
 
 class PlayerState extends ChangeNotifier {

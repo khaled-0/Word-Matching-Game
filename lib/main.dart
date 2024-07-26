@@ -1,9 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:word_matching_game/data/player_state.dart';
 import 'package:word_matching_game/data/words.dart';
-import 'package:word_matching_game/game/game_screen.dart';
+import 'package:word_matching_game/menus/title_screen.dart';
 
 main() async {
   await Words.init();
@@ -25,10 +24,7 @@ main() async {
           brightness: Brightness.dark,
         ),
       ),
-      home: GameScreen(
-        boardSize: 10,
-        players: PlayerState.create(count: 4).items,
-      ),
+      home: const TitleScreen(),
     ),
   );
 }
@@ -37,3 +33,13 @@ ScrollBehavior get scrollBehavior => const MaterialScrollBehavior().copyWith(
       physics: const BouncingScrollPhysics(),
       dragDevices: PointerDeviceKind.values.toSet(),
     );
+
+extension NavigationHelper on Widget {
+  void pushToScreen(BuildContext context) => Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => this),
+      );
+
+  void showAsDialog(BuildContext context) => Navigator.of(context).push(
+        DialogRoute(context: context, builder: (_) => this),
+      );
+}
