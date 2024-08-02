@@ -1,16 +1,25 @@
-# word_matching_game
+# 🇼ord Matching Game
 
-Make words by placing letters with friends
+Practice words with friends. Unleash your dictionary skills 🤓
 
-## Getting Started
+## Rules
 
-This project is a starting point for a Flutter application.
+The rules are extremley simple. You got an N by N square board.
 
-A few resources to get you started if this is your first Flutter project:
+- Make words by placing alphabets in order
+- Whoever places the last letter that makes a whole word get's point
+- The larger the word is, the more points you receive
+- Play until the board fills up, or for as long as you want 😉
+- Maybe savatoge others attempts of making a bigass word
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+![](docs/board.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Play now by [clicking here](https://words.fr.to) -- words.fr.to
+
+## Credits
+
+**Words List:** [John Lawler@umich](https://websites.umich.edu/~jlawler/wordlist.html)\
+**Domain From:** [afraid.org](https://freedns.afraid.org/)\
+**Hosted On:** [GitHub Pages](https://pages.github.com)\
+**Written Using:** [Flutter ❤️](https://flutter.dev)\
+**Developed By:** Your's truley
